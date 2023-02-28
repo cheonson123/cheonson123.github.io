@@ -1,0 +1,575 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="CHEONSON's Blog" href="http://cheonson123.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="CHEONSON's Blog" href="http://cheonson123.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="CHEONSON's Blog" href="http://cheonson123.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="http://cheonson123.github.io/2023/02/28/%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95/">
+
+
+
+  <title>
+快速卷积算法 |
+Cheonson = CHEONSON's Blog = Bienvenue!</title>
+<meta name="generator" content="Hexo 5.4.1"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">快速卷积算法
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2023-02-28 15:25:13">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2023-02-28T15:25:13+08:00">2023-02-28</time>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Cheonson</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/5bf6cc840c1eee492a78927590510321.jpg"></li>
+          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/a76ca77286f858f47f8d2b08232bdef1.jpg"></li>
+          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/20179998b27b569ef4634293516e8d09.jpg"></li>
+          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/20b12b4caa4ebf8870b7f34a1b442cb6.jpg"></li>
+          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/d98b6decf4bed33201f3217c864cf5a3.jpg"></li>
+          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/49bee8cf2d93684cad9a1acc8bc17d8a.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="http://cheonson123.github.io/2023/02/28/%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/yanfei.jpg">
+    <meta itemprop="name" content="cheonson">
+    <meta itemprop="description" content="Bienvenue!, 个人博客">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="CHEONSON's Blog">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h1 id="快速卷积算法"><a href="#快速卷积算法" class="headerlink" title="快速卷积算法"></a><em><strong>快速卷积算法</strong></em></h1><h2 id="Discrete-Convolution"><a href="#Discrete-Convolution" class="headerlink" title="Discrete Convolution"></a><font size=5 >Discrete Convolution</font></h2><p><font size=4 ><em><strong>概率论中的卷积</strong></em></font>   </p>
+<p>假设有两个不均匀的骰子，抛到各面的概率不同。  </p>
+<table>
+<thead>
+<tr>
+<th align="center">点数</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">6</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">概率P</td>
+<td align="center">\(a_{1}\)</td>
+<td align="center">\(a_{2}\)</td>
+<td align="center">\(a_{3}\)</td>
+<td align="center">\(a_{4}\)</td>
+<td align="center">\(a_{5}\)</td>
+<td align="center">\(a_{6}\)</td>
+</tr>
+</tbody></table>
+<hr>
+<table>
+<thead>
+<tr>
+<th align="center">点数</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">6</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">概率P</td>
+<td align="center">\({b_1}\)</td>
+<td align="center">\(b_{2}\)</td>
+<td align="center">\(b_{3}\)</td>
+<td align="center">\(b_{4}\)</td>
+<td align="center">\(b_{5}\)</td>
+<td align="center">\(b_{6}\)</td>
+</tr>
+</tbody></table>
+<hr>
+<p>同时抛出两个骰子，现在需要计算得到不同点数和的概率<br>\(P(sum&#x3D;2)&#x3D;a_{1}*b_{1}\)<br>\(P(sum&#x3D;3)&#x3D;a_{1}*b_{2}+a_{2}*b_{1}\)<br>\(P(sum&#x3D;4)&#x3D;a_{1}*b_{3}+a_{2}*b_{2}+a_{3}*b_{1}\)<br>….<br>\(P(sum&#x3D;11)&#x3D;a_{5}*b_{6}+a_{6}*b_{5}\)<br>\(P(sum&#x3D;12)&#x3D;a_{6}*b_{6}\)<br>以表格的形式展示的话，可以看出不同项是对角线上的值的和<br><img data-src="/convolution2.png#pic_center"><br>以此类推。归纳一下的话，我们可以得到以下公式<br>$$<br>P(sum&#x3D;N)&#x3D;\sum_{i&#x3D;1}^N (a_{i}\cdot b_{N-i})<br>$$  </p>
+<p>如果把n视作一个变量的话，那么我们可以定义这样一种运算:<br>$$<br>[a_{n}]*[b_{n}]&#x3D;\sum_{i&#x3D;1}^n (a_{i}\cdot b_{n-i})<br>$$  </p>
+<p>运算结果是一个列表,总共包含11个项<br>（如何计算项数？min&#x3D;1+1&#x3D;2，max&#x3D;6+6&#x3D;12，所以区间为[2,12]，因此是11项）<br>[\(a_{1}*b_{1}\) , \(a_{1}*b_{2}+a_{2}*b_{1}\) , \(a_{1}*b_{3}+a_{2}*b_{2}+a_{3}*b_{1}\) ,……,    \(a_{5}*b_{6}+a_{6}*b_{5}\) , \(a_{6}*b_{6}\)]    </p>
+<hr>
+<p>举一个简单的计算样例，将[\(b_{n}\)]翻转后，滑动与[\(a_{n}\)]对齐的项对应相乘并相加即可获得列表中的项   </p>
+<div align="center">  
+ <img data-src="/slide.png" width=50%/>  
+</div>  
+  
+
+<p>$$<br>(1,2,3)*(4,5,6)&#x3D;(4,13,28,27,18)<br>$$  </p>
+<p>$$<br>(a_{0}, a_{1},a_{2})*(b_{0},b_{1},b_{2})&#x3D;(c_{0}, c_{1},c_{2},c_{3},c_{4})<br>$$<br>*<em><strong>注意卷积的结果项是比原先的项数多的</strong></em>   </p>
+<p> 以表格形式展示   </p>
+ <div align="center">  
+ <img data-src="/toPolynomials.png" width=50%/>
+ </div>    
+
+<p><em><strong>离散卷积和普通乘积的联系</strong></em>   </p>
+<p>如果以多项式乘法的角度来观察这个表格,我们可以发现离散卷积算的是两个多项式相乘得到的各项系数<br> <div align="center"><br> <img data-src="/Polynomials.png" width=70%/><br> </div>  </p>
+<h3 id="快速卷积算法-1"><a href="#快速卷积算法-1" class="headerlink" title="快速卷积算法"></a><font size=5 ><em><strong>快速卷积算法</strong></em></font></h3><p>\((1,2,3)*(4,5,6)&#x3D;(4,13,28,27,18)\)<br>卷积的计算复杂度是\(O(n^{2})\),从之前的表格即可看出该结论。<br>我们尝试利用之前发现的多项式乘积与卷积的联系,减小卷积的计算复杂度<br>求\(a_{n}*b_{m}\)。<br>构造多项式，记\(f(x)&#x3D;a_{0}+a_{1}x+a_{2}x^2+a_{3}x^3+….+a_{n-1}x^{n-1}，<br>g(x)&#x3D;b_{0}+b_{1}x+b_{2}x^2+b_{3}x^3+….+b_{m-1}x^{m-1}\),f(x)和g(x)均为已知的多项式。<br>记\(f(x) \cdot g(x)&#x3D;h(x)&#x3D;c_{0}+c_{1}x+c_{2}x^2+c_{3}x^3+….+c_{m+n-2}x^{m+n-2}\),此处是m+n-1项，记自由度为d&#x3D;m+n-1<br>我们只需要将\([c_{d}]\)计算出来即可。h(x)有m+n-1项系数，那就需要建立m+n-1个线性方程。<br>$$h(0)&#x3D;f(0)\cdot g(0)&#x3D;c_{0}+c_{1}\cdot 0+c_{2}\cdot 0^{2}+…c_{m+n-2}\cdot 0^{m+n-2}$$<br>$$h(1)&#x3D;f(1)\cdot g(1)&#x3D;c_{01}+c_{1}\cdot 1+c_{2}\cdot 1^{2}+…c_{m+n-2}\cdot 1^{m+n-2}$$<br>$$…$$<br>$$h(m+n-2)&#x3D;f(m+n-2)\cdot g(m+n-2)$$<br>$$&#x3D;c_{0}+c_{1}\cdot (m+n-2)+c_{2}\cdot (m+n-2)^{2}+…c_{m+n-2}\cdot (m+n-2)^{m+n-2}$$<br>此处选取了x&#x3D;0,1,2,…m+n-2的点，当然可以选取别的点。<br>计算一个f(0)的计算量是n，g(0)的计算量是m，f(0)和g(0）相乘的计算量是1，因此获得一个h(0)的计算量是m+n-1，那么h(0),h(1),…h(m+n-2)的计算量总共是\((m+n-1)^{2}\)，而且还有解方程的额外开销。这么一看，利用多项式乘积获取卷积似乎并不是一个明智的做法，计算开销反而更大了。<br>但是，如果我们能在h(x)的取值上花些心思来节约计算量…<br>如果熟悉傅里叶矩阵的话，那么可以想到利用傅里叶矩阵的性质来极大地减小f(x)和g(x)对应取值的计算量。<br>h(x)包含m+n-1项，如果需要借助傅里叶矩阵的话，考虑到傅里叶矩阵的阶数是&#x2F;&#x2F;(2^{d}&#x2F;&#x2F;),d为整数，所以我们需要获取一个d，满足\(2^{d-1}\leq m+n-1\leq 2^{d}\)。缺失的项可以用包含0的项填充。对于f(x)，我们首先将其填充为d项，取\(x&#x3D;{e^{ \frac{2\pi i}{d}\cdot n} },n&#x3D;0,1,2,…d\),然后可以获得<br>$$<br>  \left[<br>  \begin{matrix}<br>   f(w_{0})  \\f(w_{1})  \\f(w_{2})  \\ …  \\ f(w_{d-1})\end{matrix}<br>  \right] &#x3D;<br>  \left[<br>  \begin{matrix}<br>   1 &amp; 1 &amp; 1 &amp;…1 \\ 1 &amp; w^{1} &amp; w^{2}… &amp; w^{d-1} \\  1 &amp; w^{2} &amp; w^{4}… &amp; w^{2d-2}  \\ .&amp;.&amp;.&amp;.\\ .&amp;.&amp;.&amp;. \\ .&amp;.&amp;.&amp;.\\ 1 &amp; w^{2d-2} &amp; w^{3d-3}… &amp; w^{(d-1)^{2}}  \end{matrix}<br>  \right]<br>   \left[<br>  \begin{matrix}<br>   a_{0}  \\  a_{1}  \\  a_{2}  \\  …  \\ a_{d-1} \end{matrix}<br>  \right]<br>$$<br>对于g(x)同理可以计算得到\([g(w_{i})],i&#x3D;0,1,2,..,d-1\)。<br>然后获取\([h(w_{i})],i&#x3D;0,1,2,..,d-1\)。最后只要对该数组，或者说向量，进行矩阵逆运算即可。<br>傅里叶逆矩阵的形式与原矩阵非常相似<br>$$<br>\frac{1}{d}\left[<br>  \begin{matrix}<br>   1 &amp; 1 &amp; 1 &amp;…1\\  1 &amp; w^{-1} &amp; w^{-2}… &amp; w^{-(d-1)}\\  1 &amp; w^{-2} &amp; w^{-4}… &amp; w^{-(2d-2)}  \\  .&amp;.&amp;.&amp;.\\  .&amp;.&amp;.&amp;. \\ .&amp;.&amp;.&amp;.\\  1 &amp; w^{-(2d-2)} &amp; w^{-(3d-3)}… &amp; w^{-(d-1)^{2}} \end{matrix}<br>  \right]<br>$$<br>傅里叶逆变换计算如下：<br>$$<br>  \left[<br>  \begin{matrix}<br>   c_{0}  \\ c_{1}  \\ c_{2}  \\  …   \\  c_{d-1} \end{matrix}<br>  \right]&#x3D;<br>  \frac{1}{d}\left[<br>  \begin{matrix}<br>   1 &amp; 1 &amp; 1 &amp;…1\\ 1 &amp; w^{-1} &amp; w^{-2}… &amp; w^{-(d-1)}\\  1 &amp; w^{-2} &amp; w^{-4}… &amp; w^{-(2d-2)}  \\  .&amp;.&amp;.&amp;.\\  .&amp;.&amp;.&amp;. \\ .&amp;.&amp;.&amp;.\\  1 &amp; w^{-(2d-2)} &amp; w^{-(3d-3)}… &amp; w^{-(d-1)^{2}} \end{matrix}<br>  \right]<br>  \left[<br>  \begin{matrix}<br>   h(w_{0})  \\  h(w_{1})  \\  h(w_{2})  \\ … \\ h(w_{d-1}) \end{matrix}<br>  \right]<br>$$<br>借助FFT，我们可以很快的计算出\([f(w_{i})]\)和\([g(w_{i})]\),继而获得\([h(w_{i})]\)。最后再利用逆变换便可以获得需要的离散卷积值。</p>
+<h3 id="两种方式来理解FFT"><a href="#两种方式来理解FFT" class="headerlink" title="两种方式来理解FFT"></a><font size=5 ><em><strong>两种方式来理解FFT</strong></em></font></h3><ul>
+<li><p><em><strong>First: 代数的角度</strong></em><br>这种方式利用了递归，并且借助奇偶多项式的性质来实现计算量的减少。下面以一个具体例子来解释这种方法。<br><em><strong>Example:</strong></em><br>\(P(x)&#x3D;x^{3}+2x^{2}+3x+5,d&#x3D;4\)<br>如果我们需要计算未知的$P(x)$的各项系数,我们需要获得d个P(x)的取值。如果P(x)是偶函数的话，那么P(x)&#x3D;P(-x),我们只需要计算\(\frac{d}{2}\)个P(x)的点，便可以获得d个方程，从而获得P(x)的各项系数。（虽然我们早就知道偶函数的奇数项系数为0）；如果是奇函数的话那么P(x)&#x3D;-P(-x)，我们同样可以减少计算量。<br>现在回归到一般的情况，P(x)是普通多项式，我们该如何减小计算量？<br>\(P(x)&#x3D;P_{even}+xP_{odd}\),对P(x)进行这样的分解！  </p>
+<p>我们对上面的例子进行分解：\(P(x)&#x3D;(2x^{2}+5)+x(x^{2}+3)\)<br>\(P(x)&#x3D;P_{e}(x^{2})+xP_{o}(x^{2})\)<br>\(P(x_{i})&#x3D;P_{e}(x_{i}^{2})+x_{i}P_{o}(x_{i}^{2}),P(-x_{i})&#x3D;P_{e}(x_{i}^{2})-x_{i}P_{o}(x_{i}^{2}),i&#x3D;1,2,3,…\frac{d}{2}\)<br>这么一来，只要代入合适的数据，便可以实现计算量的减半。但是什么样的数能够满足<br>对于\(P(x)&#x3D;2x^{2}+5+x(x^{2}+3)\)，计算\(x&#x3D;[\pm x_{1},\pm x_{2}]\)即可。为了进一步减小计算量，用同样的方法对 \(P_{e}\)和\(P_{o}\)进行分解。</p>
+</li>
+</ul>
+<p> \(P_{e}&#x3D;2x^{2}+5&#x3D;2x^{2}+5+x\cdot 0\), 计算\(x&#x3D;[{x_{1}^{2}},x_{2}^{2}]\)即可<br>  \(P_{o}&#x3D;x^{2}+5&#x3D;x^{2}+5+x\cdot 0\)，则是计算\(x&#x3D;[{x_{1}^{2}},x_{2}^{2}]\)<br>  但是，\(x&#x3D;[{x_{1}^{2}},x_{2}^{2}]\)并不是\(x&#x3D;[\pm x_{1},\pm x_{2}]\)这样正负对称的，因此无法使用奇偶性来简化计算。<br>  如何能使得\(x_{2}^{2}&#x3D;-x_{1}^{2}\)呢？<br>  <div align="center"><br>   <img data-src="/decomposition.png" width=50%/><br>  </div>  </p>
+<p>  这需要借助复数\(e^{\frac{2\pi i}{4}\cdot x }\)。<br>  \([\pm x_{1},\pm x_{2}]&#x3D;[\pm 1,\pm i]\)，然后是\([{x_{1}^{2}},x_{2}^{2}]\)，即\([{x_{1}^{2}},-x_{1}^{2}]&#x3D;[\pm x_{1}^{2}]&#x3D;[\pm 1]\)<br>  <div align="center"><br>   <img data-src="/complex.png" width=50%/><br>  </div>  </p>
+<p>  <em><strong>正负是从箭头处开始区分,即实数轴上方为正，下方为负。但是为什么？</strong></em><br>  对于\([e^{\frac{2\pi i}{n}\cdot w}],w&#x3D;[0，1，2，3,…,n-1]\)<br>  取一个位于正区域的复数\(e^{\frac{2\pi i}{n}\cdot m}\),\(0\leq m\leq \frac{n}{2}-1\),那么对应的负区域的复数就是\(e^{\frac{2\pi i}{n}\cdot (m+\frac{n}{2})}&#x3D;e^{\frac{2\pi i}{n}\cdot m}\cdot e^{\frac{2\pi i}{n}\cdot \frac{n}{2})}&#x3D;e^{\frac{2\pi i}{n}\cdot m}\cdot e^{\pi i}&#x3D;-e^{\frac{2\pi i}{n}\cdot m}\)<br>  \([\pm x_{1},\pm x_{2}]\)是需要取（1，0），（0，i）的两个复数进行运算。然后（-1，0）和（0，-i）是借助奇偶性减少了计算量。<br>  在进一步的分解中\([{x_{1}^{2}},-x_{1}^{2}]\),是加倍了步长，仅需要选取（1，0）的这一个复数进行运算，然后（-1，0）借助奇偶性即可。<br>  举一个更长的例子,\([\pm x_{1},\pm x_{2},\pm x_{3},\pm x_{4},\pm x_{5},\pm x_{6},\pm x_{7},\pm x_{8}]\)。<br>  那么需要选取\([e^{\frac{2\pi i}{16}\cdot w}],w&#x3D;[0，1，2,…，7]\)位置的复数。即图中实数轴上半部分的黄色点，包括（1，0），但是不包括（-1，0）。至于\([e^{\frac{2\pi i}{16}\cdot w}],w&#x3D;[8，9，2,…，15]\)这几个复数是利用奇偶性。<br>  对于进一步的分解\([{x_{1}^{2}},x_{2}^{2},…x_{8}^{2}]\),为了使其呈正负对称，我们需要其满足:\(x_{5}^{2}&#x3D;-x_{1}^{2}，x_{6}^{2}&#x3D;-x_{2}^{2}，x_{7}^{2}&#x3D;-x_{3}^{2}，x_{8}^{2}&#x3D;-x_{4}^{2}\)，从而获得\([\pm x_{1}^{2}，\pm x_{2}^{2}，\pm x_{3}^{2}，\pm x_{4}^{2}]\).<br>  那么在这张图上，我们需要取\([e^{\frac{2\pi i}{8}\cdot w}],w&#x3D;[0，1，2，3]\)位置的复数进行计算。相当于在原先取的黄点集合上，每两个黄点取一个（当然包含第一个）。至于\([e^{\frac{2\pi i}{8}\cdot w}],w&#x3D;[4，5，6，7]\),同上，借助奇偶性来计算。<br>  然后可以继续进行分解为\([\pm 1,\pm i]\)，分解和我们原本的example的分解相同……<br>  下面我们利用所得到的结论，来将总结为一个公式：<br>  \(P(x)&#x3D;P_{e}(x^{2})+xP_{o}{x^{2}},x&#x3D;[\pm x_{1},\pm x_{2},…,\pm x_\frac{n}{2}]\)<br>  一般会将\([e^{\frac{2\pi i}{n}\cdot w }],w&#x3D;[0,1,…,n-1]\)写作\([w^{j}],j&#x3D;[0,1,…,n-1]\)<br>  \(P(w^{j})&#x3D;P_{e}(w^{2j})+w^{j}P_{o}(w^{2j}),x&#x3D;[\pm w^{0},\pm w^{1},…,\pm w^{\frac{n}{2}-1}]&#x3D;[w^{0},w^{1},…w^{\frac{n}{2}-1},w^{\frac{n}{2}},…,w^{n-1}]\)<br>  下面总结一下利用奇偶性进行计算的公式，首先将取值按正负分开：<br>  \(P(x_{i})&#x3D;P_{e}(x_{i}^{2})+x_{i}P_{o}(x_{i}^{2}),x&#x3D;[x_{1},x_{2},…,x_{\frac{n}{2}}]\)<br>  \(P(-x_{i})&#x3D;P_{e}(x_{i}^{2})-x_{i}P_{o}(x_{i}^{2}),x&#x3D;[-x_{1},-x_{2},…,-x_{\frac{n}{2}}]\)<br>  将我们精心选取的复数代入公式：<br>  \(P(w^{j})&#x3D;P_{e}(w^{2j})+w_{j}P_{o}(w^{2j}),x&#x3D;[w^{0},w^{1},…,w^{\frac{n}{2}-1}]\)   </p>
+<p>  \(P(w^{j+\frac{n}{2}})&#x3D;P(-w^{j})&#x3D;P_{e}(w^{2j})-w_{j}P_{o}(w^{2j}),x&#x3D;[w^{0+\frac{n}{2},w^{1+\frac{n}{2}}},…,w^{n-1}]&#x3D;[-w^{0},-w^{1},…,-w^{\frac{n}{2}-1}]\)<br>  然后是递归地使用该公式对多项式进行分解和计算。分解到只剩一项常数项时，则返回该常数<br>  <em><strong>FFT的描述实际上已经到此为止了，接下来的描述式则是有助于写代码的</strong></em><br>  记\([y]&#x3D;[P(w^{0}),P(w^{1}),P(w^{2}),…,P(w^{n-1})]\)<br>  \([y_{e}]&#x3D;[P_{e}(w^{0}),P_{e}(w^{2}),P_{e}(w^{4}),P_{e}(w^{6})，…,P_{e}(w^{n-2})]\)<br>  \([y_{o}]&#x3D;[P_{o}(w^{0}),P_{o}(w^{2}),P_{o}(w^{4}),P_{o}(w^{6})，…,P_{o}(w^{n-2})]\)<br>  \(P(w_{j})&#x3D;y_{e}[j]+w^{j}y_o[j],j&#x3D;[0,1,…,\frac{n}{2}-1]\)<br>  \(P(w_{j+\frac{n}{2}})&#x3D;y_{e}[j]-w^{j}y_o[j],j&#x3D;[0,1,…,\frac{n}{2}-1]\)  </p>
+<h2 id="代码部分"><a href="#代码部分" class="headerlink" title="代码部分"></a>代码部分</h2><pre><code class="python">
+def FFT(P):
+  # P:[p0,p1,p2...],记录了多项式P的各项系数
+  n=len(P)#n is a power of 2
+    if n==1:
+     return P
+  #w=e^(2*pi*i/n)
+  w=complex(math.cos(2*math.pi/n),math.sin(2*math.pi/n))
+  #Pe=[p0,p2,p4,p6...]
+  #Po=[p1,p3,p5...]
+  Pe=[::2]
+  Po=[1::2]
+    
+  Ye=FFT(Pe)
+  Yo=FFT(Po)
+  Y=[0]*n
+  #w^(j)=e^(2j*pi*i/n)
+  for j in range(n/2):
+      Y[j]=Ye&#123;j&#125;+complex(math.cos(2*j*math.pi/n),math.sin(2*math.pi/n))*Yo[j]
+      Y[j+n/2]=Ye[j]-complex(math.cos(2*j*math.pi/n),math.sin(2*math.pi/n))Yo[j]
+  return y
+
+# 至于傅里叶逆变换，观察傅里叶逆矩阵即可看出与原矩阵的区别在于，每个元素都取共轭，然后乘以1/n，然后代码里也仅需对一行进行修改。
+
+def IFFT(P):
+  # P:[p0,p1,p2...],记录了多项式P的各项系数
+  n=len(P)#n is a power of 2
+  if n==1:
+     return P
+  #w=e^(2*pi*i/n)
+  w=complex(math.cos(2*math.pi/n),math.sin(2*math.pi/n))
+  #Pe=[p0,p2,p4,p6...]
+  #Po=[p1,p3,p5...]
+  Pe=[::2]
+  Po=[1::2]
+    
+  Ye=FFT(Pe)
+  Yo=FFT(Po)
+  Y=[0]*n
+  #w^(j)=1/n*e^(-2j*pi*i/n)
+  for j in range(n/2):
+      Y[j]=Ye&#123;j&#125;+complex(math.cos(2*j*math.pi/n),math.sin(2*math.pi/n))*Yo[j]
+      Y[j+n/2]=Ye[j]-complex(math.cos(2*j*math.pi/n),math.sin(2*math.pi/n))Yo[j]
+  return y
+</code></pre>
+<ul>
+<li>Second: 矩阵的角度<br>$$F_{n}&#x3D;\left[<br>\begin{matrix}<br> 1 &amp; 1 &amp; 1 &amp;…1\\ 1 &amp; w^{1} &amp; w^{2}… &amp; w^{d-1}\\  1 &amp; w^{2} &amp; w^{4}… &amp; w^{2d-2}  \\ .&amp;.&amp;.&amp;.\<br> .&amp;.&amp;.&amp;. \\ .&amp;.&amp;.&amp;.\\  1 &amp; w^{2d-2} &amp; w^{3d-3}… &amp; w^{(d-1)^{2}}  \end{matrix}<br>\right]$$<br>其中\(F_{n(x,y)}&#x3D;w_{n}^{x\cdot y}\)<br>对于\(w_{n}^{j}&#x3D;e^{\frac{j\cdot 2\pi i}{n}}\)，可以有以下推论：\((w_{n}^{j})^{2}&#x3D;(e^{\frac{j\cdot 2\pi i}{n}})^{2}&#x3D;e^{\frac{j\cdot 2\pi i}{\frac{n}{2}}}&#x3D;w_{\frac{n}{2}}^{j}\)。例如：\((w_{64}^{j})^{2}&#x3D;w_{32}^{j}\)</li>
+</ul>
+<hr>
+<p>下面展示对64阶傅里叶矩阵的分解：<br>$$[F_{64}]&#x3D;\left[<br>  \begin{matrix}<br>   1 &amp; 1 &amp; 1 &amp;…&amp; 1\\ 1 &amp; w_{64}^{1} &amp; w_{64}^{2}&amp;… &amp; w_{64}^{63}\\  1 &amp; w_{64}^{2} &amp; w_{64}^{4}&amp;… &amp; w_{64}^{126}  \\  .&amp;.&amp;.&amp;.&amp;.\\  .&amp;.&amp;.&amp;.&amp;. \\  .&amp;.&amp;.&amp;.&amp;.\\  1 &amp; w_{64}^{126} &amp; w_{64}^{189}&amp;… &amp; w_{64}^{(63)^{2}}  \end{matrix}<br>  \right]<br>$$<br>$$[F_{64}] &#x3D;\left[<br>  \begin{matrix}<br>   I &amp; D\\  I &amp; -D\\  \end{matrix}<br>  \right]\left[<br>  \begin{matrix}<br>   F_{32} &amp; O\\ O &amp; F_{32}\\ \end{matrix}<br>  \right]P<br>$$<br>其中I是32*32的单位矩阵；矩阵D后面会重点解释；矩阵P是个置换矩阵，在解释完D后很好理解<br>$$D&#x3D;\left[<br>  \begin{matrix}<br>   1 &amp; 0 &amp; 0 &amp;…&amp; 0\\  0 &amp; w_{64}^{1} &amp; 0 &amp;… &amp; 0\\   0 &amp; 0 &amp; w_{64}^{2} &amp;… &amp; 0\\ .&amp;.&amp;.&amp;.&amp;.\\  .&amp;.&amp;.&amp;.&amp;. \\  .&amp;.&amp;.&amp;.&amp;.\\  0 &amp; 0 &amp; 0&amp;… &amp; w_{64}^{31}  \end{matrix}<br>  \right]<br>$$<br>P是一种置换矩阵，将一矩阵的第一列向量放在第一列，\(\frac{n}{2}+1\)列向量放在第二列，以此类推<br>$$P&#x3D;\left[<br>  \begin{matrix}<br>   1 &amp; 0 &amp; 0 &amp; 0 &amp;… &amp; 0\\   0 &amp; 0 &amp; 0 &amp; 0 &amp;… &amp; 0\\   0 &amp; 0 &amp; 1 &amp; 0 &amp;… &amp; 0\\  .&amp;.&amp;.&amp;.&amp;.\\   .&amp;.&amp;.&amp;.&amp;.\\  0 &amp; 1 &amp; 0 &amp; 0 &amp;…&amp; 0\\  0 &amp; 0 &amp; 0 &amp; 0<br>  &amp;…&amp; 0\\  0 &amp; 0 &amp; 0 &amp; 1 &amp;…&amp; 0\\   .&amp;.&amp;.&amp;.&amp;…&amp;.\\   .&amp;.&amp;.&amp;.&amp;…&amp;.\\  \end{matrix}<br>  \right]$$<br>举一个具体的，阶数更小的P可能看起来更好理解,例如4阶P矩阵：<br>$$P_{4}&#x3D;\left[<br>  \begin{matrix}<br>   1 &amp; 0 &amp; 0 &amp; 0\\  0 &amp; 0 &amp; 1 &amp; 0\\   0 &amp; 1 &amp; 0 &amp; 0\\   0 &amp; 0 &amp; 0 &amp; 1\\  \end{matrix}<br>  \right]<br>$$<br>我们来分析一下这个矩阵分解<br>$$\left[<br>  \begin{matrix}<br>   I &amp; D\\   I &amp; -D\\  \end{matrix}<br>  \right]\left[<br>  \begin{matrix}<br>   F_{32} &amp; O\\  O &amp; F_{32}\\  \end{matrix}<br>  \right]&#x3D;\left[<br>  \begin{matrix}<br>   IF_{32} &amp; DF_{32}\\   IF_{32} &amp; -DF_{32}\\<br>  \end{matrix}<br>  \right]<br>$$  </p>
+<p>我们将分解后的矩阵相乘，反推这个矩阵分解是如何构造的。我们可以发现这个矩阵分解的方式与之前做的多项式分解有异曲同工之妙。<br>首先看第一行\([IF_{32},DF_{32}]\)，我们可以将其与这个分解对比<br>\(P(w^{j})&#x3D;P_{e}(w^{2j})+w_{j}P_{o}(w^{2j}),x&#x3D;[w^{0},w^{1},…,w^{31}]\)<br>矩阵的第二行\([IF_{32},-DF_{32}]\)可以与这个分解对比<br>\(P(w^{j+\frac{n}{2}})&#x3D;P(-w^{j})&#x3D;P_{e}(w^{2j})-w_{j}P_{o}(w^{2j}),x&#x3D;[w^{0+\frac{n}{2},w^{1+\frac{n}{2}}},…,w^{n-1}]&#x3D;[-w^{0},-w^{1},…,-w^{31}]\)</p>
+<div align="center">  
+  <img data-src="/complex.png" width=50%/> 
+</div> 
+
+<p>所以说矩阵第一行计算的是图中实数轴上半部分对应的复数，第二行计算的是实数轴下半部分的复数。<br>接着将目光放在矩阵的第一列和第二列。\(IF_{32}\) 和 \(DF_{32}\) ，其实在先前的与多项式分解的对比中，可以注意到他们之间的联系是even和odd，但是怎么在矩阵中体现是？我们可以看到,<br>我们试图将分解为\(F_{32}\)的矩阵还原为\(F_{64}\)矩阵。但是显然\(F_{32}\)中的各项元素\(w_{32}^{i}\)与\(F_{64}\)中所需的\(w_{64}^{i}\)是不同的。为了直观地理解<br>\(IF_{32}\) 和 \(DF_{32}\)和P究竟做了什么，我们不妨用具体的例子看看这一过程。<br>利用\((w_{64}^{j})^{2}&#x3D;w_{32}^{j}\),即\(w_{64}^{2j}&#x3D;w_{32}^{j}\)，我们可以得到<br>$$F_{32}&#x3D;<br>  \left[<br>  \begin{matrix}<br>  1 &amp; 1 &amp; 1 &amp;…&amp;1\\  1 &amp; w_{32}^{1} &amp; w_{32}^{2}&amp;… &amp; w_{32}^{31}\\ 1 &amp; w_{32}^{2} &amp; w_{32}^{4}&amp;… &amp;  w_{32}^{31\cdot 2}\\  .&amp;.&amp;.&amp;.&amp;.\\  .&amp;.&amp;.&amp;.&amp;.\\  .&amp;.&amp;.<br>  &amp;.&amp;.\\  1 &amp; w_{32}^{31} &amp; w_{32}^{2\cdot 31}&amp;… &amp; w_{32}^{31^{2}}\\  \end{matrix}<br>  \right]&#x3D;<br>  \left[<br>  \begin{matrix}<br>  1 &amp; 1 &amp; 1 &amp;…&amp;1\\  1 &amp; w_{64}^{2} &amp; w_{64}^{4}&amp;… &amp; w_{64}^{31\cdot 2}\\ 1 &amp; w_{64}^{4} &amp; w_{64}^{8}&amp;… &amp;  w_{64}^{31\cdot 4}\\  .&amp;.&amp;.&amp;.&amp;.\\  .&amp;.&amp;.&amp;.&amp;.\\  .&amp;.&amp;.<br>  &amp;.&amp;.\\  1 &amp; w_{64}^{2\cdot 31} &amp; w_{64}^{4\cdot 31}&amp;… &amp; w_{64}^{62\cdot 31}\\  \end{matrix}<br>  \right]<br>$$<br>可以看出这是\(F_{64}\)里的前32行里的偶数列。<br>对偶数列稍作处理即可获得奇数列，按行分别乘以\([w_{64}^{0},w_{64}^{1},…,w_{64}^{31}]\)，即\(D\)矩阵。<br>$$DF_{32}&#x3D;\left[<br>  \begin{matrix}<br>   1 &amp; 1 &amp; 1 &amp;…&amp;1 \\  w_{64}^{1} &amp; w_{64}^{3} &amp; w_{64}^{5}&amp;… &amp; w_{64}^{63} \\  w_{64}^{2} &amp; w_{64}^{4} &amp; w_{64}^{6}&amp; … &amp; w_{64}^{126}  \\  .&amp;.&amp;.&amp;.&amp;<br>  \\  .&amp;.&amp;.&amp;.&amp;. \\   .&amp;.&amp;.&amp;.&amp;.\\   w_{64}^{31} &amp; w_{64}^{3\cdot 31} &amp; w_{64}^{5\cdot 31}&amp;… &amp; w_{64}^{63\cdot 31}  \end{matrix}<br>  \right]<br>$$<br>至于\(F_{64}\)的后32行，\((w_{64}^{j+32})^{2}&#x3D;w_{64}^{2j+64}&#x3D;w_{64}^{2j}\),所以可以再次利用\(w_{64}^{2j}&#x3D;w_{32}^{j}\)得到偶数列，因此也是\(IF\)。<br>至于奇数列则是按行分别乘以\([w_{64}^{32+0},w_{64}^{32+1},…,w_{64}^{32+31}]\)<br>注意，\(w_{64}^{32+j}&#x3D;w_{64}^{32}\cdot w_{64}^{j}&#x3D;-w_{64}^{j}\)。即\(-D\)矩阵。<br>这下子我们已经得到了\(F_{64}\)的所有项，剩下的就是用个矩阵把奇数项和偶数项放在正确的位置，这就是P完成的工作。我们用反推的方式了解了FFT矩阵分解的原理，不得不惊叹这里的每一个步骤是<br>多么的巧妙！<br>至于傅里叶矩阵的逆矩阵，涉及到很多线性代数知识，我也并不没有理解。简单地来说就是利用傅里叶矩阵是个正交矩阵的特性，可以很容易的获得其逆矩阵。</p>
+
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2023-02-28 20:34:30" itemprop="dateModified" datetime="2023-02-28T20:34:30+08:00">2023-02-28</time>
+  </span>
+  <span id="2023/02/28/快速卷积算法/" class="item leancloud_visitors" data-flag-title="快速卷积算法" title="阅读次数">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">阅读次数</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">次</span>
+  </span>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>cheonson <i class="ic i-at"><em>@</em></i>CHEONSON's Blog
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="http://cheonson123.github.io/2023/02/28/%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95/" title="快速卷积算法">http://cheonson123.github.io/2023/02/28/快速卷积算法/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2023/02/08/FirstBlog/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;img.timelessq.com&#x2F;images&#x2F;2022&#x2F;07&#x2F;26&#x2F;6481fffb5173a5621c7af0848ed50fa7.jpg" title="FirstBlog">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 随笔</span>
+  <h3>FirstBlog</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">快速卷积算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Discrete-Convolution"><span class="toc-number">1.1.</span> <span class="toc-text">Discrete Convolution</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95-1"><span class="toc-number">1.1.1.</span> <span class="toc-text">快速卷积算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%9D%A5%E7%90%86%E8%A7%A3FFT"><span class="toc-number">1.1.2.</span> <span class="toc-text">两种方式来理解FFT</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E9%83%A8%E5%88%86"><span class="toc-number">1.2.</span> <span class="toc-text">代码部分</span></a></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="cheonson"
+      data-src="/images/yanfei.jpg">
+  <p class="name" itemprop="name">cheonson</p>
+  <div class="description" itemprop="description">个人博客</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">4</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">2</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">2</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friend-links/" rel="section"><i class="ic i-heart"></i>友链</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-clipboard"></i>书架</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/books/computer-books/" rel="section"><i class="ic i-opera"></i>计算机科学</a>
+  </li>
+
+  </ul>
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%9A%8F%E7%AC%94/" title="分类于 随笔">随笔</a>
+</div>
+
+    <span><a href="/2023/02/08/FirstBlog/" title="FirstBlog">FirstBlog</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Math/" title="分类于 Math">Math</a>
+</div>
+
+    <span><a href="/2023/02/07/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B02/" title="微分方程笔记2">微分方程笔记2</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2023/02/28/%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95/" title="快速卷积算法">快速卷积算法</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Math/" title="分类于 Math">Math</a>
+</div>
+
+    <span><a href="/2023/02/07/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B0/" title="微分方程笔记">微分方程笔记</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">cheonson @ Cheonson</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2023/02/28/快速卷积算法/',
+    favicon: {
+      show: "（●´3｀●）可以走了！",
+      hide: "(´Д｀)快回来！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","hOffset":30,"vOffset":30,"width":180,"height":360},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>

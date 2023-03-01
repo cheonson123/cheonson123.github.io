@@ -24,13 +24,15 @@
 <link rel="stylesheet" href="/css/app.css?v=0.2.5">
 
   
+  <meta name="keywords" content="Fast Convolution Algorithm,Fast Fourier Transform" />
 
-<link rel="canonical" href="http://cheonson123.github.io/2023/02/28/%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95/">
+
+<link rel="canonical" href="http://cheonson123.github.io/2023/03/01/%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95/">
 
 
 
   <title>
-快速卷积算法 |
+快速卷积算法 - Math - Algorithm |
 Cheonson = CHEONSON's Blog = Bienvenue!</title>
 <meta name="generator" content="Hexo 5.4.1"></head>
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -62,12 +64,12 @@ Cheonson = CHEONSON's Blog = Bienvenue!</title>
   </h1>
   
 <div class="meta">
-  <span class="item" title="创建时间：2023-02-28 15:25:13">
+  <span class="item" title="创建时间：2023-03-01 14:22:13">
     <span class="icon">
       <i class="ic i-calendar"></i>
     </span>
     <span class="text">发表于</span>
-    <time itemprop="dateCreated datePublished" datetime="2023-02-28T15:25:13+08:00">2023-02-28</time>
+    <time itemprop="dateCreated datePublished" datetime="2023-03-01T14:22:13+08:00">2023-03-01</time>
   </span>
 </div>
 
@@ -100,12 +102,12 @@ Cheonson = CHEONSON's Blog = Bienvenue!</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/a1f3404a5032323ea4857ac5a6354d2f.jpg"></li>
-          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/b7dd27ac7273dd91b0085c941520d6f5.jpg"></li>
-          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/601b4c1b1f50f3ceb9e8080e1957a890.jpg"></li>
-          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/7dad57904e56f14df7975109aaf03bc2.jpg"></li>
-          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/f85e0c5cc31d609ad0b6e48a88040ecb.jpg"></li>
-          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/3c4316b68ee81cc6a059ffc346752e5b.jpg"></li>
+          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/9d41e0144387641f894a827002ea5c33.jpg"></li>
+          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/c42b981631c2a7ddaed6e13bd5847ebb.jpg"></li>
+          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/8cf4932745804d12b330608b12a53aca.jpg"></li>
+          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/db2a95362955b963ac39e3b449f84fa0.jpg"></li>
+          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/4ac9e89ebedbc831ce278f4ad5bbfc58.jpg"></li>
+          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/6481fffb5173a5621c7af0848ed50fa7.jpg"></li>
         </ul>
       </div>
     </header>
@@ -130,11 +132,16 @@ Cheonson = CHEONSON's Blog = Bienvenue!</title>
     
 <div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
 <i class="ic i-home"></i>
-<span><a href="/">首页</a></span>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Algorithm/" itemprop="item" rel="index" title="分类于 Algorithm"><span itemprop="name">Algorithm</span></a>
+<meta itemprop="position" content="1" /></span>
+<i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Algorithm/Math/" itemprop="item" rel="index" title="分类于 Math"><span itemprop="name">Math</span></a>
+<meta itemprop="position" content="2" /></span>
 </div>
 
     <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
-  <link itemprop="mainEntityOfPage" href="http://cheonson123.github.io/2023/02/28/%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95/">
+  <link itemprop="mainEntityOfPage" href="http://cheonson123.github.io/2023/03/01/%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95/">
 
   <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="image" content="/images/yanfei.jpg">
@@ -264,6 +271,10 @@ def IFFT(P):
 <p>我们将分解后的矩阵相乘，反推这个矩阵分解是如何构造的。我们可以发现这个矩阵分解的方式与之前做的多项式分解有异曲同工之妙。<br>首先看第一行\([IF_{32},DF_{32}]\)，我们可以将其与这个分解对比<br>\(P(w^{j})&#x3D;P_{e}(w^{2j})+w_{j}P_{o}(w^{2j}),x&#x3D;[w^{0},w^{1},…,w^{31}]\)<br>矩阵的第二行\([IF_{32},-DF_{32}]\)可以与这个分解对比<br>\(P(w^{j+\frac{n}{2}})&#x3D;P(-w^{j})&#x3D;P_{e}(w^{2j})-w_{j}P_{o}(w^{2j}),x&#x3D;[w^{0+\frac{n}{2},w^{1+\frac{n}{2}}},…,w^{n-1}]&#x3D;[-w^{0},-w^{1},…,-w^{31}]\)<br>    <img data-src="complex.png" width="65%" height="65%">   </p>
 <p>所以说矩阵第一行计算的是图中实数轴上半部分对应的复数，第二行计算的是实数轴下半部分的复数。<br>接着将目光放在矩阵的第一列和第二列。\(IF_{32}\) 和 \(DF_{32}\) ，其实在先前的与多项式分解的对比中，可以注意到他们之间的联系是even和odd，但是怎么在矩阵中体现是？我们可以看到,<br>我们试图将分解为\(F_{32}\)的矩阵还原为\(F_{64}\)矩阵。但是显然\(F_{32}\)中的各项元素\(w_{32}^{i}\)与\(F_{64}\)中所需的\(w_{64}^{i}\)是不同的。为了直观地理解<br>\(IF_{32}\) 和 \(DF_{32}\)和P究竟做了什么，我们不妨用具体的例子看看这一过程。<br>利用\((w_{64}^{j})^{2}&#x3D;w_{32}^{j}\),即\(w_{64}^{2j}&#x3D;w_{32}^{j}\)，我们可以得到<br>$$F_{32}&#x3D;\left[<br>  \begin{matrix}<br>   1 &amp; 1 &amp; 1 &amp;…&amp;1\\  1 &amp; w_{32}^{1} &amp; w_{32}^{2}&amp;… &amp; w_{32}^{31}\\   1 &amp; w_{32}^{2} &amp; w_{32}^{4}&amp;… &amp; w_{32}^{62}  \\   .&amp;.&amp;.&amp;.&amp;.\\   .&amp;.&amp;.&amp;.&amp;. \\   .&amp;.&amp;.&amp;.&amp;.\\   1 &amp; w_{32}^{31} &amp; w_{32}^{2*31}&amp;… &amp; w_{32}^{31^{2}}  \end{matrix}<br>  \right]&#x3D;\left[<br>  \begin{matrix}<br>   1 &amp; 1 &amp; 1 &amp;…&amp;1\\   1 &amp; w_{64}^{2} &amp; w_{64}^{4}&amp;… &amp; w_{64}^{62}\\   1 &amp; w_{64}^{4} &amp; w_{64}^{8}&amp;… &amp; w_{64}^{62\cdot 2}  \\   .&amp;.&amp;.&amp;.&amp;.\\   .&amp;.&amp;.&amp;.&amp;.\\   .&amp;.&amp;.&amp;.&amp;.\\   1 &amp; w_{64}^{2\cdot 31} &amp; w_{64}^{4\cdot 31}&amp;… &amp; w_{64}^{62\cdot 31}  \end{matrix}<br>  \right]$$<br>$$&#x3D;\left[<br>  \begin{matrix}<br>   1 &amp; 1 &amp; 1 &amp;…&amp;1\\   1 &amp; w_{64}^{1\cdot 2} &amp; w_{64}^{1\cdot 4}&amp;… &amp; w_{64}^{1\cdot 62}\\   1 &amp; w_{64}^{2\cdot 2} &amp; w_{64}^{2\cdot 4}&amp;… &amp; w_{64}^{2\cdot 62}  \\   .&amp;.&amp;.&amp;.&amp;.\\   .&amp;.&amp;.&amp;.&amp;. \\   .&amp;.&amp;.&amp;.&amp;.\\   1 &amp; w_{64}^{31\cdot 2} &amp; w_{64}^{31\cdot4}&amp;… &amp; w_{64}^{31\cdot 62}  \end{matrix}<br>  \right]<br>$$<br>可以看出这是\(F_{64}\)里的前32行里的偶数列。<br>对偶数列稍作处理即可获得奇数列，按行分别乘以\([w_{64}^{0},w_{64}^{1},…,w_{64}^{31}]\)，即\(D\)矩阵。<br>$$DF_{32}&#x3D;\left[<br>  \begin{matrix}<br>   1 &amp; 1 &amp; 1 &amp;…&amp;1 \\  w_{64}^{1} &amp; w_{64}^{3} &amp; w_{64}^{5}&amp;… &amp; w_{64}^{63} \\  w_{64}^{2} &amp; w_{64}^{4} &amp; w_{64}^{6}&amp; … &amp; w_{64}^{126}  \\  .&amp;.&amp;.&amp;.&amp;<br>  \\  .&amp;.&amp;.&amp;.&amp;. \\   .&amp;.&amp;.&amp;.&amp;.\\   w_{64}^{31} &amp; w_{64}^{3\cdot 31} &amp; w_{64}^{5\cdot 31}&amp;… &amp; w_{64}^{63\cdot 31}  \end{matrix}<br>  \right]<br>$$<br>至于\(F_{64}\)的后32行，第j+32 (j&gt;32)行偶数列中的第一列的元素是1(第j行偶数列的第一列的元素是1)，偶数列中的第二列的元素是\(w_{64}^{(j+32)\cdot 2}&#x3D;w_{64}^{2j+64}&#x3D;w_{64}^{2j}\)(对应第j行偶数列的第二列元素也是\(w_{64}^{2j}\)),第三列元素是\(w_{64}^{(j+32)\cdot 4}&#x3D;w_{64}^{4j+128}&#x3D;w_{64}^{4j}\),和前面32行的偶数列的元素是完全一样的,因此后32行的偶数列也是\(IF\)。<br>至于奇数列则是按行分别乘以\([w_{64}^{32+0},w_{64}^{32+1},…,w_{64}^{32+31}]\)<br>注意，\(w_{64}^{32+j}&#x3D;w_{64}^{32}\cdot w_{64}^{j}&#x3D;-w_{64}^{j}\)。即\(-D\)矩阵。<br>这下子我们已经得到了\(F_{64}\)的所有项，剩下的就是用个矩阵把奇数项和偶数项放在正确的位置，这就是最后需要矩阵P来完成的工作了。我们用反推的方式了解了FFT矩阵分解的原理，不得不惊叹这里的每一个步骤是多么的巧妙！<br>至于傅里叶矩阵的逆矩阵，涉及到很多线性代数知识，我也并没有完全理解。简单地来说就是利用傅里叶矩阵是个正交矩阵的特性，能够很容易的获得其逆矩阵。<br>完结撒花！<br>也可以在这里查看动画教学<u><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1oN2FwTzdxMTZWMCZhbXA7YWJfY2hhbm5lbD1SZWR1Y2libGU=">https://www.youtube.com/watch?v=h7apO7q16V0&amp;ab_channel=Reducible</span><u>。<br><del>本文就是抄的这个。</del>  </p>
 
+      <div class="tags">
+          <a href="/tags/Fast-Convolution-Algorithm/" rel="tag"><i class="ic i-tag"></i> Fast Convolution Algorithm</a>
+          <a href="/tags/Fast-Fourier-Transform/" rel="tag"><i class="ic i-tag"></i> Fast Fourier Transform</a>
+      </div>
   </div>
 
    <footer>
@@ -274,9 +285,9 @@ def IFFT(P):
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">更新于</span>
-    <time title="修改时间：2023-03-01 14:09:37" itemprop="dateModified" datetime="2023-03-01T14:09:37+08:00">2023-03-01</time>
+    <time title="修改时间：2023-03-01 14:22:17" itemprop="dateModified" datetime="2023-03-01T14:22:17+08:00">2023-03-01</time>
   </span>
-  <span id="2023/02/28/快速卷积算法/" class="item leancloud_visitors" data-flag-title="快速卷积算法" title="阅读次数">
+  <span id="2023/03/01/快速卷积算法/" class="item leancloud_visitors" data-flag-title="快速卷积算法" title="阅读次数">
       <span class="icon">
         <i class="ic i-eye"></i>
       </span>
@@ -295,7 +306,7 @@ def IFFT(P):
   </li>
   <li class="link">
     <strong>本文链接：</strong>
-    <a href="http://cheonson123.github.io/2023/02/28/%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95/" title="快速卷积算法">http://cheonson123.github.io/2023/02/28/快速卷积算法/</a>
+    <a href="http://cheonson123.github.io/2023/03/01/%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95/" title="快速卷积算法">http://cheonson123.github.io/2023/03/01/快速卷积算法/</a>
   </li>
   <li class="license">
     <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
@@ -314,7 +325,7 @@ def IFFT(P):
     <div class="item left">
       
 
-  <a href="/2023/02/08/FirstBlog/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;img.timelessq.com&#x2F;images&#x2F;2022&#x2F;07&#x2F;26&#x2F;9b626c5ba21d7cb4dbcba2b507688bbb.jpg" title="FirstBlog">
+  <a href="/2023/02/08/FirstBlog/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;img.timelessq.com&#x2F;images&#x2F;2022&#x2F;07&#x2F;26&#x2F;009ee927d495427d088feacdda5589be.jpg" title="FirstBlog">
   <span class="type">上一篇</span>
   <span class="category"><i class="ic i-flag"></i> 随笔</span>
   <h3>FirstBlog</h3>
@@ -341,6 +352,9 @@ def IFFT(P):
           <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">快速卷积算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E5%8D%B7%E7%A7%AF"><span class="toc-number">1.1.</span> <span class="toc-text">离散卷积</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95-1"><span class="toc-number">1.2.</span> <span class="toc-text">快速卷积算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%9D%A5%E7%90%86%E8%A7%A3FFT"><span class="toc-number">2.</span> <span class="toc-text">两种方式来理解FFT</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#First-%E4%BB%A3%E6%95%B0%E7%9A%84%E8%A7%92%E5%BA%A6"><span class="toc-number">2.1.</span> <span class="toc-text">First: 代数的角度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Second-%E7%9F%A9%E9%98%B5%E7%9A%84%E8%A7%92%E5%BA%A6"><span class="toc-number">2.2.</span> <span class="toc-text">Second: 矩阵的角度</span></a></li></ol></li></ol>
       </div>
       <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li class="active"><a href="/2023/03/01/%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95/" rel="bookmark" title="快速卷积算法">快速卷积算法</a></li>
+        </ul>
       </div>
       <div class="overview panel" data-title="站点概览">
         <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -359,13 +373,13 @@ def IFFT(P):
     </div>
     <div class="item categories">
       <a href="/categories/">
-        <span class="count">2</span>
+        <span class="count">4</span>
         <span class="name">分类</span>
       </a>
     </div>
     <div class="item tags">
       <a href="/tags/">
-        <span class="count">2</span>
+        <span class="count">4</span>
         <span class="name">标签</span>
       </a>
     </div>
@@ -457,19 +471,20 @@ def IFFT(P):
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/Math/" title="分类于 Math">Math</a>
+<a href="/categories/%E9%9A%8F%E7%AC%94/" title="分类于 随笔">随笔</a>
 </div>
 
-    <span><a href="/2023/02/07/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B02/" title="微分方程笔记2">微分方程笔记2</a></span>
+    <span><a href="/2023/02/08/FirstBlog/" title="FirstBlog">FirstBlog</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
+<a href="/categories/Math/" title="分类于 Math">Math</a>
 </div>
 
-    <span><a href="/2023/02/28/%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95/" title="快速卷积算法">快速卷积算法</a></span>
+    <span><a href="/2023/02/07/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B02/" title="微分方程笔记2">微分方程笔记2</a></span>
   </li>
 
       
@@ -486,10 +501,12 @@ def IFFT(P):
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E9%9A%8F%E7%AC%94/" title="分类于 随笔">随笔</a>
+<a href="/categories/Algorithm/" title="分类于 Algorithm">Algorithm</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/Algorithm/Math/" title="分类于 Math">Math</a>
 </div>
 
-    <span><a href="/2023/02/08/FirstBlog/" title="FirstBlog">FirstBlog</a></span>
+    <span><a href="/2023/03/01/%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95/" title="快速卷积算法">快速卷积算法</a></span>
   </li>
 
   </ul>
@@ -520,7 +537,7 @@ def IFFT(P):
   </div>
 <script data-config type="text/javascript">
   var LOCAL = {
-    path: '2023/02/28/快速卷积算法/',
+    path: '2023/03/01/快速卷积算法/',
     favicon: {
       show: "（●´3｀●）可以走了！",
       hide: "(´Д｀)快回来！"

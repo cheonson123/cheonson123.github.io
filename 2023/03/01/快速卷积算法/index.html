@@ -102,12 +102,12 @@ Cheonson = CHEONSON's Blog = Bienvenue!</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/9d41e0144387641f894a827002ea5c33.jpg"></li>
-          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/c42b981631c2a7ddaed6e13bd5847ebb.jpg"></li>
-          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/8cf4932745804d12b330608b12a53aca.jpg"></li>
-          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/db2a95362955b963ac39e3b449f84fa0.jpg"></li>
-          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/4ac9e89ebedbc831ce278f4ad5bbfc58.jpg"></li>
-          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/6481fffb5173a5621c7af0848ed50fa7.jpg"></li>
+          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/f53974c854a887e80e9f72685a99854c.jpg"></li>
+          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/ac67892be446a3283c5a470d464a010b.jpg"></li>
+          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/1fca97d4bee5434e2dec3c0a4a75bc64.jpg"></li>
+          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/86a28095f8e05aa07544b454ec6f01f6.jpg"></li>
+          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/84792bda8699365f11e183429da41a63.jpg"></li>
+          <li class="item" data-background-image="https://img.timelessq.com/images/2022/07/26/68fb5832b107119e9f351a83be51ed2f.jpg"></li>
         </ul>
       </div>
     </header>
@@ -213,7 +213,7 @@ Cheonson = CHEONSON's Blog = Bienvenue!</title>
 <p>$$<br>(a_{0}, a_{1},a_{2})*(b_{0},b_{1},b_{2})&#x3D;(c_{0}, c_{1},c_{2},c_{3},c_{4})<br>$$<br>*<em><strong>注意卷积的结果项是比原先的项数多的</strong></em>   </p>
 <p> 以表格形式展示<br> <img data-src="toPolynomials.png" width="65%" height="65%"> </p>
 <p><em><strong>离散卷积和普通乘积的联系</strong></em>   </p>
-<p>如果以多项式乘法的角度来观察这个表格,我们可以发现离散卷积算的是两个多项式相乘得到的各项系数<br> <img data-src="Polynomials.png" width="70%" height="70%">   </p>
+<p>如果以多项式乘法的角度来观察这个表格,我们可以发现离散卷积算的是两个多项式相乘得到的各项系数<br> <img data-src="polynomials.png" width="70%" height="70%">   </p>
 <h2 id="快速卷积算法-1"><a href="#快速卷积算法-1" class="headerlink" title="快速卷积算法"></a><font size=5 ><em><strong>快速卷积算法</strong></em></font></h2><p>\((1,2,3)*(4,5,6)&#x3D;(4,13,28,27,18)\)<br>卷积的计算复杂度是\(O(n^{2})\),从之前的表格即可看出该结论。<br>我们尝试利用之前发现的多项式乘积与卷积的联系,减小卷积的计算复杂度<br>求\(a_{n}*b_{m}\)：<br>构造多项式，记：\(f(x)&#x3D;a_{0}+a_{1}x+a_{2}x^2+a_{3}x^3+….+a_{n-1}x^{n-1}\)，\(g(x)&#x3D;b_{0}+b_{1}x+b_{2}x^2+b_{3}x^3+….+b_{m-1}x^{m-1}\)。<br>f(x)和g(x)均为已知的多项式。<br>记\(f(x) \cdot g(x)&#x3D;h(x)&#x3D;c_{0}+c_{1}x+c_{2}x^2+c_{3}x^3+….+c_{m+n-2}x^{m+n-2}\),此处是m+n-1项，记自由度为d&#x3D;m+n-1<br>我们只需要将\([c_{d}]\)计算出来即可。h(x)有m+n-1项系数，那就需要建立m+n-1个线性方程。<br>$$h(0)&#x3D;f(0)\cdot g(0)&#x3D;c_{0}+c_{1}\cdot 0+c_{2}\cdot 0^{2}+…c_{m+n-2}\cdot 0^{m+n-2}$$<br>$$h(1)&#x3D;f(1)\cdot g(1)&#x3D;c_{01}+c_{1}\cdot 1+c_{2}\cdot 1^{2}+…c_{m+n-2}\cdot 1^{m+n-2}$$<br>$$…$$<br>$$h(m+n-2)&#x3D;f(m+n-2)\cdot g(m+n-2)$$<br>$$&#x3D;c_{0}+c_{1}\cdot (m+n-2)+c_{2}\cdot (m+n-2)^{2}+…c_{m+n-2}\cdot (m+n-2)^{m+n-2}$$<br>此处选取了x&#x3D;0,1,2,…m+n-2的点，当然可以选取别的点。<br>计算一个f(0)的计算量是n，g(0)的计算量是m，f(0)和g(0）相乘的计算量是1，因此获得一个h(0)的计算量是m+n-1，那么h(0),h(1),…h(m+n-2)的计算量总共是\((m+n-1)^{2}\)，而且还有解方程的额外开销。这么一看，利用多项式乘积获取卷积似乎并不是一个明智的做法，计算开销反而更大了。<br>但是，如果我们能在h(x)的取值上花些心思来节约计算量…<br>如果熟悉傅里叶矩阵的话，那么可以想到利用傅里叶矩阵的性质来极大地减小f(x)和g(x)对应取值的计算量。<br>h(x)包含m+n-1项，如果需要借助傅里叶矩阵的话，考虑到傅里叶矩阵的阶数是\(2^{d}\),d为整数，所以我们需要获取一个d，满足\(2^{d-1}\leq m+n-1\leq 2^{d}\)。缺失的项可以用包含0的项填充。对于f(x)，我们首先将其填充为d项，取\(x&#x3D;{e^{ \frac{2\pi i}{d}\cdot n} },n&#x3D;0,1,2,…d\),然后可以获得<br>$$<br>  \left[<br>  \begin{matrix}<br>   f(w_{0})  \\f(w_{1})  \\f(w_{2})  \\ …  \\ f(w_{d-1})\end{matrix}<br>  \right] &#x3D;<br>  \left[<br>  \begin{matrix}<br>   1 &amp; 1 &amp; 1 &amp;…1 \\ 1 &amp; w^{1} &amp; w^{2}… &amp; w^{d-1} \\  1 &amp; w^{2} &amp; w^{4}… &amp; w^{2d-2}  \\ .&amp;.&amp;.&amp;.\\ .&amp;.&amp;.&amp;. \\ .&amp;.&amp;.&amp;.\\ 1 &amp; w^{2d-2} &amp; w^{3d-3}… &amp; w^{(d-1)^{2}}  \end{matrix}<br>  \right]<br>   \left[<br>  \begin{matrix}<br>   a_{0}  \\  a_{1}  \\  a_{2}  \\  …  \\ a_{d-1} \end{matrix}<br>  \right]<br>$$<br>对于g(x)同理可以计算得到\([g(w_{i})],i&#x3D;0,1,2,..,d-1\)。<br>然后获取\([h(w_{i})],i&#x3D;0,1,2,..,d-1\)。最后只要对该数组，或者说向量，进行矩阵逆运算即可。<br>傅里叶逆矩阵的形式与原矩阵非常相似<br>$$<br>\frac{1}{d}\left[<br>  \begin{matrix}<br>   1 &amp; 1 &amp; 1 &amp;…1\\  1 &amp; w^{-1} &amp; w^{-2}… &amp; w^{-(d-1)}\\  1 &amp; w^{-2} &amp; w^{-4}… &amp; w^{-(2d-2)}  \\  .&amp;.&amp;.&amp;.\\  .&amp;.&amp;.&amp;. \\ .&amp;.&amp;.&amp;.\\  1 &amp; w^{-(2d-2)} &amp; w^{-(3d-3)}… &amp; w^{-(d-1)^{2}} \end{matrix}<br>  \right]<br>$$<br>傅里叶逆变换计算如下：<br>$$<br>  \left[<br>  \begin{matrix}<br>   c_{0}  \\ c_{1}  \\ c_{2}  \\  …   \\  c_{d-1} \end{matrix}<br>  \right]&#x3D;<br>  \frac{1}{d}\left[<br>  \begin{matrix}<br>   1 &amp; 1 &amp; 1 &amp;…1\\ 1 &amp; w^{-1} &amp; w^{-2}… &amp; w^{-(d-1)}\\  1 &amp; w^{-2} &amp; w^{-4}… &amp; w^{-(2d-2)}  \\  .&amp;.&amp;.&amp;.\\  .&amp;.&amp;.&amp;. \\ .&amp;.&amp;.&amp;.\\  1 &amp; w^{-(2d-2)} &amp; w^{-(3d-3)}… &amp; w^{-(d-1)^{2}} \end{matrix}<br>  \right]<br>  \left[<br>  \begin{matrix}<br>   h(w_{0})  \\  h(w_{1})  \\  h(w_{2})  \\ … \\ h(w_{d-1}) \end{matrix}<br>  \right]<br>$$<br>借助FFT，我们可以很快的计算出\([f(w_{i})]\)和\([g(w_{i})]\),继而获得\([h(w_{i})]\)。最后再利用逆变换便可以获得需要的离散卷积值。  </p>
 <h1 id="两种方式来理解FFT"><a href="#两种方式来理解FFT" class="headerlink" title="两种方式来理解FFT"></a><em><strong>两种方式来理解FFT</strong></em></h1><h2 id="First-代数的角度"><a href="#First-代数的角度" class="headerlink" title="First: 代数的角度"></a><font size=5 >First: 代数的角度</font></h2><p>  这种方式利用了递归，并且借助奇偶多项式的性质来实现计算量的减少。下面以一个具体例子来解释这种方法。<br>  <em><strong>Example:</strong></em><br>  \(P(x)&#x3D;x^{3}+2x^{2}+3x+5,d&#x3D;4\)<br>  如果我们需要计算未知的\(P(x)\)的各项系数,我们需要获得d个P(x)的取值。如果P(x)是偶函数的话，那么P(x)&#x3D;P(-x),我们只需要计算\(\frac{d}{2}\)个P(x)的点，便可以获得d个方程，从而获得P(x)的各项系数。（虽然我们早就知道偶函数的奇数项系数为0）；如果是奇函数的话那么P(x)&#x3D;-P(-x)，我们同样可以减少计算量。<br>  现在回归到一般的情况，P(x)是普通多项式，我们该如何减小计算量？<br>  \(P(x)&#x3D;P_{even}+xP_{odd}\),对P(x)进行这样的分解！  </p>
 <p>  我们对上面的例子进行分解：\(P(x)&#x3D;(2x^{2}+5)+x(x^{2}+3)\)<br>  \(P(x)&#x3D;P_{e}(x^{2})+xP_{o}(x^{2})\)<br>  \(P(x_{i})&#x3D;P_{e}(x_{i}^{2})+x_{i}P_{o}(x_{i}^{2}),P(-x_{i})&#x3D;P_{e}(x_{i}^{2})-x_{i}P_{o}(x_{i}^{2}),i&#x3D;1,2,3,…\frac{d}{2}\)<br>  这么一来，只要代入合适的数据，便可以实现计算量的减半。但是什么样的数能够满足<br>  对于\(P(x)&#x3D;2x^{2}+5+x(x^{2}+3)\)，计算\(x&#x3D;[\pm x_{1},\pm x_{2}]\)即可。为了进一步减小计算量，用同样的方法对 \(P_{e}\)和\(P_{o}\)进行分解。<br> \(P_{e}&#x3D;2x^{2}+5&#x3D;2x^{2}+5+x\cdot 0\), 计算\(x&#x3D;[{x_{1}^{2}},x_{2}^{2}]\)即可<br>  \(P_{o}&#x3D;x^{2}+5&#x3D;x^{2}+5+x\cdot 0\)，则是计算\(x&#x3D;[{x_{1}^{2}},x_{2}^{2}]\)<br>  但是，\(x&#x3D;[{x_{1}^{2}},x_{2}^{2}]\)并不是\(x&#x3D;[\pm x_{1},\pm x_{2}]\)这样正负对称的，因此无法使用奇偶性来简化计算。<br>  如何能使得\(x_{2}^{2}&#x3D;-x_{1}^{2}\)呢？<br>  <img data-src="decomposition.png" width="65%" height="65%">   </p>
@@ -285,7 +285,7 @@ def IFFT(P):
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">更新于</span>
-    <time title="修改时间：2023-03-01 14:22:17" itemprop="dateModified" datetime="2023-03-01T14:22:17+08:00">2023-03-01</time>
+    <time title="修改时间：2023-03-01 14:32:14" itemprop="dateModified" datetime="2023-03-01T14:32:14+08:00">2023-03-01</time>
   </span>
   <span id="2023/03/01/快速卷积算法/" class="item leancloud_visitors" data-flag-title="快速卷积算法" title="阅读次数">
       <span class="icon">
@@ -325,7 +325,7 @@ def IFFT(P):
     <div class="item left">
       
 
-  <a href="/2023/02/08/FirstBlog/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;img.timelessq.com&#x2F;images&#x2F;2022&#x2F;07&#x2F;26&#x2F;009ee927d495427d088feacdda5589be.jpg" title="FirstBlog">
+  <a href="/2023/02/08/FirstBlog/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;img.timelessq.com&#x2F;images&#x2F;2022&#x2F;07&#x2F;26&#x2F;dcb8f9f223a5db821d797261469b6a17.jpg" title="FirstBlog">
   <span class="type">上一篇</span>
   <span class="category"><i class="ic i-flag"></i> 随笔</span>
   <h3>FirstBlog</h3>
@@ -471,16 +471,6 @@ def IFFT(P):
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E9%9A%8F%E7%AC%94/" title="分类于 随笔">随笔</a>
-</div>
-
-    <span><a href="/2023/02/08/FirstBlog/" title="FirstBlog">FirstBlog</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
 <a href="/categories/Math/" title="分类于 Math">Math</a>
 </div>
 
@@ -491,10 +481,10 @@ def IFFT(P):
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/Math/" title="分类于 Math">Math</a>
+<a href="/categories/%E9%9A%8F%E7%AC%94/" title="分类于 随笔">随笔</a>
 </div>
 
-    <span><a href="/2023/02/07/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B0/" title="微分方程笔记">微分方程笔记</a></span>
+    <span><a href="/2023/02/08/FirstBlog/" title="FirstBlog">FirstBlog</a></span>
   </li>
 
       
@@ -507,6 +497,16 @@ def IFFT(P):
 </div>
 
     <span><a href="/2023/03/01/%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95/" title="快速卷积算法">快速卷积算法</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Math/" title="分类于 Math">Math</a>
+</div>
+
+    <span><a href="/2023/02/07/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B0/" title="微分方程笔记">微分方程笔记</a></span>
   </li>
 
   </ul>

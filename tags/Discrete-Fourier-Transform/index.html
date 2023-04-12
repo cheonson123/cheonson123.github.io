@@ -24,16 +24,12 @@
 <link rel="stylesheet" href="/css/app.css?v=0.2.5">
 
   
-  <meta name="keywords" content="Ordinary Differential Equation" />
 
-
-<link rel="canonical" href="http://cheonson123.github.io/2023/02/07/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B0/">
+<link rel="canonical" href="http://cheonson123.github.io/tags/Discrete-Fourier-Transform/">
 
 
 
-  <title>
-微分方程笔记 - Math |
-Cheonson = CHEONSON's Blog = Bienvenue!</title>
+  <title>标签：Discrete Fourier Transform | Cheonson = CHEONSON's Blog = Bienvenue!</title>
 <meta name="generator" content="Hexo 5.4.1"></head>
 <body itemscope itemtype="http://schema.org/WebPage">
   <div id="loading">
@@ -60,19 +56,9 @@ Cheonson = CHEONSON's Blog = Bienvenue!</title>
         <div id="brand">
           <div class="pjax">
           
-  <h1 itemprop="name headline">微分方程笔记
+  <h1 itemprop="name headline">
+    包含标签"Discrete Fourier Transform"的文章
   </h1>
-  
-<div class="meta">
-  <span class="item" title="创建时间：2023-02-07 16:16:12">
-    <span class="icon">
-      <i class="ic i-calendar"></i>
-    </span>
-    <span class="text">发表于</span>
-    <time itemprop="dateCreated datePublished" datetime="2023-02-07T16:16:12+08:00">2023-02-07</time>
-  </span>
-</div>
-
 
           </div>
         </div>
@@ -102,12 +88,12 @@ Cheonson = CHEONSON's Blog = Bienvenue!</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="http://www.cheonson.top:5000/pic?136646"></li>
-          <li class="item" data-background-image="http://www.cheonson.top:5000/pic?997722"></li>
-          <li class="item" data-background-image="http://www.cheonson.top:5000/pic?248386"></li>
-          <li class="item" data-background-image="http://www.cheonson.top:5000/pic?690758"></li>
-          <li class="item" data-background-image="http://www.cheonson.top:5000/pic?422718"></li>
-          <li class="item" data-background-image="http://www.cheonson.top:5000/pic?625890"></li>
+          <li class="item" data-background-image="http://www.cheonson.top:5000/pic?970871"></li>
+          <li class="item" data-background-image="http://www.cheonson.top:5000/pic?851849"></li>
+          <li class="item" data-background-image="http://www.cheonson.top:5000/pic?868130"></li>
+          <li class="item" data-background-image="http://www.cheonson.top:5000/pic?244952"></li>
+          <li class="item" data-background-image="http://www.cheonson.top:5000/pic?348929"></li>
+          <li class="item" data-background-image="http://www.cheonson.top:5000/pic?478075"></li>
         </ul>
       </div>
     </header>
@@ -128,121 +114,46 @@ Cheonson = CHEONSON's Blog = Bienvenue!</title>
       <div class="inner">
         <div id="main" class="pjax">
           
-  <div class="article wrap">
-    
-<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-<i class="ic i-home"></i>
-<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
-<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Math/" itemprop="item" rel="index" title="分类于 Math"><span itemprop="name">Math</span></a>
-<meta itemprop="position" content="1" /></span>
-</div>
+  <div class="collapse wrap">
+    <h2 class="item header">
+      <a href="/tags">全部</a>
+      <small>/</small>
+      Discrete Fourier Transform
+      <small>标签</small>
+    </h2>
 
-    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
-  <link itemprop="mainEntityOfPage" href="http://cheonson123.github.io/2023/02/07/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B0/">
+        <article class="item normal" itemscope itemtype="http://schema.org/Article">
+          <div class="meta">
+            <time itemprop="dateCreated"
+                  datetime="2023-04-12T19:20:39+08:00"
+                  content="2023-04-12">
+              2023-04-12
+            </time>
+                <span><a href="/categories/DFT/Math/">Math</a></span>
+          </div>
 
-  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="image" content="/images/yanfei.jpg">
-    <meta itemprop="name" content="cheonson">
-    <meta itemprop="description" content="Bienvenue!, 个人博客">
-  </span>
-
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="CHEONSON's Blog">
-  </span>
-
-  <div class="body md" itemprop="articleBody">
-    
-
-    <p><font size=6 ><em><strong>微分方程</strong></em></font><br><font size=4 >$$A{y}’’+{By}’ +Cy&#x3D;0, r_{1}, r_{2}\in R，(A,B,C为实数),B^{2}  -4AC&lt;0$$</font></p>
-<h2 id="特征方程解为虚数"><a href="#特征方程解为虚数" class="headerlink" title="特征方程解为虚数"></a>特征方程解为虚数</h2><p><font size=4 >Exmaple: \({y}’’ -{y}’ +2y&#x3D;0\)</font><br>我们希望获得微分方程的实数解，但是要借助复数解来获得。  </p>
-<p>复数解的形式：$$\mathbf{\hat y&#x3D;c_{1}e^{r_{1} t} +c_{2} e^{r_{2} t}}，此处\mathbf{r_{1},r_{2},c_{1},c_{2}}为复数$$<br>$$\mathbf{\hat{y} &#x3D;(m_{1} +n_{1}i)e^{a+bi}t+(m_{2} +n_{2}i)e^{a-bi}t}$$<br>$$\mathbf{\hat{y}的共轭复数&#x3D;(m_{1} -n_{1}i)e^{a-bi}t+(m_{2} -n_{2}i)e^{a+bi}t}$$<br>由于我们最终需要的是实数解，所以：$$Img(\hat y)&#x3D;0,Img(\hat y的共轭复数)&#x3D;0$$<br>$$\mathbf{\hat y&#x3D;\hat y的共轭}$$<br>可以得到：$$\mathbf{((m_{2}+n_{2}i)e^{a-bi}t&#x3D;(m_{1}-n_{1}i)e^{a-bi}}$$<br>代入后得：$$\mathbf{\hat y&#x3D;(m_{1} +n_{1}i)e^{a+bi}t+(m_{1}-n_{1}i)e^{a-bi}}$$<br>整理可得：$$\mathbf{y&#x3D;e^{at} [m_{1}(e^{ibt}+e^{-ibt})+n_{1}i(e^{ibt}-e^{-ibt})]}$$<br>利用下面的公式进行转化<br>$$\mathbf{\frac{e^{i t}+e^{-it}}{2} &#x3D;cost}$$<br>$$\mathbf{\frac{e^{i t}-e^{-it}}{2i} &#x3D;sint}$$  </p>
-<p>转化后得到：$$\LARGE y&#x3D;e^{at} (m_{1}cosbt+n_{1}sinbt)$$这就是我们需要的实数解，也可以将该解的形式写为以下形式： $$\LARGE y&#x3D;Ce^{at}cos(bt+\varphi)$$ </p>
-<hr>
-<h2 id="另一种思考的角度"><a href="#另一种思考的角度" class="headerlink" title="另一种思考的角度"></a>另一种思考的角度</h2><p>$$\mathbf{\hat{y}&#x3D;c_{1}e^{r_{1}t}+c_{2}e^{r_{2}t}&#x3D;c_{1}e^{(a+bi)t}+c_{2}{e^{(a-bi)t}},r_{1},r_{2}}为复数，c_{1}，c_{2}为实数<br>$$<br>这是从特征方程中获得的复数解。将复数解简化为该形式：<br>$$\hat{y}&#x3D;u+vi$$<br>代入原微分方程可得：<br>$$(Au’’+Bu’+C)+(Av’’+Bv’+C)i&#x3D;0$$<br>0是实数，所以可以得到$$(Au’’+Bu’+C)&#x3D;0，(Av’’+Bv’+C)&#x3D;0$$<br>也就是说，针对复数解的实部和虚部可以各获得一个解:<br>$$\mathbf{y&#x3D;Re(\hat{y})+Img(\hat{y})&#x3D;e^{at}[Re(c_{1}e^{ibt}+c_{2}e^{-ibt})+Img(c_{1}e^{ibt}+c_{2}e^{-ibt})]&#x3D;e^{at}(m_{1}cosbt+m_{2}sinbt)}$$<br>完结撒花！</p>
-
-      <div class="tags">
-          <a href="/tags/Ordinary-Differential-Equation/" rel="tag"><i class="ic i-tag"></i> Ordinary Differential Equation</a>
-      </div>
+          <div class="title">
+              <a href="/2023/04/12/%E7%A6%BB%E6%95%A3%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" itemprop="url">
+                <span itemprop="name">离散傅里叶变换</span>
+              </a>
+          </div>
+        </article>
   </div>
 
-   <footer>
-
-    <div class="meta">
-  <span class="item">
-    <span class="icon">
-      <i class="ic i-calendar-check"></i>
-    </span>
-    <span class="text">更新于</span>
-    <time title="修改时间：2023-02-08 16:39:22" itemprop="dateModified" datetime="2023-02-08T16:39:22+08:00">2023-02-08</time>
-  </span>
-  <span id="2023/02/07/微分方程笔记/" class="item leancloud_visitors" data-flag-title="微分方程笔记" title="阅读次数">
-      <span class="icon">
-        <i class="ic i-eye"></i>
-      </span>
-      <span class="text">阅读次数</span>
-      <span class="leancloud-visitors-count"></span>
-      <span class="text">次</span>
-  </span>
-</div>
-
-      
-
-<div id="copyright">
-<ul>
-  <li class="author">
-    <strong>本文作者： </strong>cheonson <i class="ic i-at"><em>@</em></i>CHEONSON's Blog
-  </li>
-  <li class="link">
-    <strong>本文链接：</strong>
-    <a href="http://cheonson123.github.io/2023/02/07/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B0/" title="微分方程笔记">http://cheonson123.github.io/2023/02/07/微分方程笔记/</a>
-  </li>
-  <li class="license">
-    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-  </footer>
-
-</article>
-
-  </div>
   
 
-<div class="post-nav">
-    <div class="item left">
-    </div>
-    <div class="item right">
-      
-
-  <a href="/2023/02/07/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B02/" itemprop="url" rel="next" data-background-image="http:&#x2F;&#x2F;www.cheonson.top:5000&#x2F;pic?972741" title="微分方程笔记2">
-  <span class="type">下一篇</span>
-  <span class="category"><i class="ic i-flag"></i> Math</span>
-  <h3>微分方程笔记2</h3>
-  </a>
-
-    </div>
-</div>
-
-  
-  <div class="wrap" id="comments"></div>
 
 
         </div>
         <div id="sidebar">
           
-
 <div class="inner">
 
   <div class="panels">
     <div class="inner">
       <div class="contents panel pjax" data-title="文章目录">
-          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E6%96%B9%E7%A8%8B%E8%A7%A3%E4%B8%BA%E8%99%9A%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">特征方程解为虚数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%A6%E4%B8%80%E7%A7%8D%E6%80%9D%E8%80%83%E7%9A%84%E8%A7%92%E5%BA%A6"><span class="toc-number">2.</span> <span class="toc-text">另一种思考的角度</span></a></li></ol>
       </div>
       <div class="related panel pjax" data-title="系列文章">
-        <ul>
-          <li class="active"><a href="/2023/02/07/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B0/" rel="bookmark" title="微分方程笔记">微分方程笔记</a></li><li><a href="/2023/02/07/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B02/" rel="bookmark" title="微分方程笔记2">微分方程笔记2</a></li>
-        </ul>
       </div>
       <div class="overview panel" data-title="站点概览">
         <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -343,7 +254,6 @@ Cheonson = CHEONSON's Blog = Bienvenue!</title>
   </ul>
 </div>
 
-
         </div>
         <div class="dimmer"></div>
       </div>
@@ -437,7 +347,7 @@ Cheonson = CHEONSON's Blog = Bienvenue!</title>
   </div>
 <script data-config type="text/javascript">
   var LOCAL = {
-    path: '2023/02/07/微分方程笔记/',
+    path: 'tags/Discrete-Fourier-Transform/',
     favicon: {
       show: "（●´3｀●）可以走了！",
       hide: "(´Д｀)快回来！"
